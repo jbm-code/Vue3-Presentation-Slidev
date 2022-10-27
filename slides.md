@@ -609,6 +609,7 @@ const greeting = ref('Hello from parent')
 
 ---
 theme: vuetiful
+layout: two-cols
 ---
 
 # 9 - Components + props
@@ -620,13 +621,36 @@ Um einen dynamischen Wert zu übergeben, können wir auch die v-bind-Syntax verw
 ```js
 <script setup>
 import { ref } from 'vue'
-import ChildComp from './ChildComp.vue'
+import ChildComponentWithProps 
+      from './ChildComponentWithProps.vue'
 
 const greeting = ref('Hello from parent')
 </script>
 
 <template>
-  <ChildComp :msg="greeting" />
+  <ChildComponentWithProps :msg="greeting" />
+</template>
+```
+
+
+::right::
+#
+<br>
+<ParentComponent1/>
+<br>
+<br>
+"./ChildComponentWithProps.vue"
+```js
+<script setup>
+const props = defineProps({
+  msg: String
+})
+</script>
+
+<template>
+    <button class="button">
+       {{msg}}
+    </button>
 </template>
 ```
 
@@ -644,13 +668,14 @@ Zusätzlich zur Weitergabe von Data via props, kann die parent Komponente auch T
 ```js
 <script setup>
 import { ref } from 'vue'
-import ChildComp from './ChildComp.vue'
+import ChildComponentWithSlot 
+    from './ChildComponentWithSlot.vue'
 
 const msg = ref('from parent')
 </script>
 
 <template>
-  <ChildComp></ChildComp>
+  <ChildComponentWithSlot></ChildComponentWithSlot>
 </template>
 ```
 <br>
@@ -658,7 +683,7 @@ const msg = ref('from parent')
 ::right::
 
 #
-"./ChildComp.vue"
+"./ChildComponentWithSlot.vue"
 ```js
 <template>
     <button class="button">
@@ -669,4 +694,4 @@ const msg = ref('from parent')
 <br>
 <br>
 <br>
-<Slots/>
+<ParentComponent2/>
